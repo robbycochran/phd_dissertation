@@ -1,0 +1,476 @@
+\chapter{Background and Related Work} 
+\label{ch:background}
+
+In this \dissertation we use the analysis of source code to develop a
+model of client behavior, against which messages from the
+client are checked by a verifier. In this chapter we place our
+proposed methods in the wider context of security and verification
+methods by describing related work and background information.
+We start with an overview of cheating in online games and
+specific methods for detecting malicious behavior in such
+environments. We then give an overview of existing techniques for the
+detection of remote client misbehavior in the general case. While this
+dissertation places an emphasis on online games, it is useful to
+understand our contributions in the context of other verification
+methods; so we give an overview of verification methods in distributed
+systems and the emerging field of verifiable computing. Finally,
+we give background information on symbolic execution, which serves as
+the foundation for the proposals in the following chapters.
+
+\section{Detecting and Preventing Misbehavior in Online Games}
+
+As long as humans have played games, there have been players that have
+wished to cheat; and as long as there have been cheaters, players have
+devised methods to prevent or detect this cheating. One of the
+earliest examples of a cheat prevention method existed over 2000 years
+ago. In Ancient Rome, many games were based on dice and those who
+wished to keep players honest used a device to prevent the dice
+thrower from influencing the result~\cite{lanciani1892}. The
+\emph{pyxis cornea} was  a table-top sized ``tower'' for rolling dice
+fairly; the dice were placed into an open funnel at the top and rolled
+down a internal staircase until exiting onto the table. Games of the
+modern era are much more complicated than those of Ancient Rome but the
+tension between honest players and cheating players still exists.
+
+%The most common reason for players to cheat is to ``gain advantage
+%over others''~\cite{doherty14}. 
+
+Modern techniques for the detection and prevention of malicious
+behavior in online games come in many varieties.
+In practice however, methods consist largely of
+client-side monitoring and server-side heuristics which are
+potentially incomplete, manually programmed and effort-intensive.
+Commenting on the issues developers face, game consultant Hawkins
+states:
+\begin{quote}
+{\sl Players love to cheat --- especially in online games ... be
+ready to add server-side support to prevent user cheating with
+methods that you were not able to predict.}~\cite{hawkins03:quote}
+\end{quote}
+
+We now give an overview of the techniques developers and researchers
+have investigated for the detection and prevention of malicious
+behavior in online games and how they relate to the proposals of this
+\dissertation. For more information on this area, a number of authors
+have conducted surveys on the problem of of cheating in online games:
+Yan and Randell~\cite{yan05:classification}, Lyhyaoui et
+al.~\cite{lyhyaoui05:categorization}, and Webb and
+Soh~\cite{webb08:survey}. 
+
+
+\subsubsection{Monitoring}
+One common approach to defeat a variety of cheats involves augmenting
+the client-side computer with monitoring functionality to perform
+cheat detection (e.g., \punkbuster, \wow's \warden, \valve's
+\vac~\cite{valve15:vac}
+and~\cite{delap04:verification,feng08:stealth,kaiser09:fides,monch06:protecting,schluessler07:bot}).
+Such approaches require consideration of how to defend this
+functionality from tampering, and some commercial examples have met
+with resistance from the user community. Accusations of client-side
+monitoring that violates standard expectations for player privacy have
+been levied against both \warden~\cite{ward05:warcraft} and
+\vac~\cite{bright14:vacdns}. These systems aggressively ban users that
+trigger cheat detection monitoring; \valve's \vac has banned
+over 2 million player accounts~\cite{surian:banned}. However, the systems
+do have false positives; in 2010, \valve 
+erroneously banned 12,000 players~\cite{meer10:falseban}. In
+contrast, our approach does not rely on monitoring functionality being
+added to clients and does not have false positives.
+
+\subsubsection{Bot Detection}
+Other work focuses on wholly different cheats than we consider in this
+\dissertation.  One example is game ``bots'' that perform certain
+repetitive or precise tasks in place of human
+gamers~\cite{chen06:bot,schluessler07:bot,yampolskly07:bot,chen08:manifold,mitterhofer09:bot}.
+Bots that utilize the sanctioned game client to do so (as many do)
+will go undetected by our scheme, since the client behavior as seen by
+the server could have been performed by the sanctioned game client on
+inputs from a real human user (albeit an especially skilled or patient
+one).  
+
+\subsubsection{Network Manipulation}
+Another cheat that has received significant attention occurs when
+clients delay or suppress reporting (and choosing) their own actions
+for a game step until after learning what others have chosen in that
+step (e.g.,~\cite{baughman01:cheat-proof,cronin03:cheat-proof}).  Such
+attacks can also go unnoticed by our techniques, if such delay or
+suppression could be explained by factors (e.g., network congestion)
+other than client modification.  Our techniques are compatible with
+all proposed defenses of which we are aware for 
+network delay suppression and so can be used together with them.  
+
+\subsubsection{Peer-to-Peer Auditing}
+Finally, various works have examined security specifically for
+peer-to-peer games, e.g., using peer-based
+auditing~\cite{goodman08:auditing,izaiku06:mmorpg,kabus05:mmog}.  Our
+technique may be applicable in some peer-to-peer auditing schemes, but
+we focus on the client-server setting in this \dissertation. 
+
+
+\section{Detecting Remote Client Misbehavior in the General Case}
+
+Detecting the misbehavior of remote clients in a client-server
+application is an area that has received considerable attention
+outside the domain of online games. We now expand our scope to examine
+methods for detecting remote client misbehavior in all types of networked
+software.
+
+\subsubsection{Model-based Verification}
+The proposals of this \dissertation are a special case of model-based
+verification, a strategy where a model of proper client behavior is
+constructed and then compared against actual client behaviors. Giffin
+et al.~\cite{giffin02:remote} developed such an approach for
+validating remote system calls back to home server from potentially
+untrusted remote machines. In that work, remote system calls are
+compared to a control flow model generated from the binary code of the
+outsourced computation, specifically either a non-deterministic
+finite-state automaton or a push-down automaton that mirrors the flow
+of control in the executable. Later work by the same authors takes a
+more precise approach with a model-based intrusion detection method
+that uses context-sensitive Dyck models~\cite{giffin04:context}.
+Another example is work by Guha et al.~\cite{guha09:ajax}: through
+static analysis of the client portion of web applications (HTML and
+JavaScript), their system constructs a control-flow graph for the
+client that describes the sequences of URLs that the client-side
+program can invoke.  Any request that does not conform to this graph
+is then flagged as potentially malicious. Other works
+~\cite{bisht10:notamper,skrupsky13:tamperproof} address parameter
+tampering attacks in web forms by using server-side proxies to infer a
+parameter constraint model when a web form is served to a client. Each
+client request using the web form is checked against the parameter
+model. 
+
+The techniques we propose in this dissertation follow a similar
+paradigm to the above approaches. We use analysis (in our case, of
+source code) to develop a model of client behavior, against which
+inputs (messages from the client) are compared.  Unfortunately,
+compromised clients that make calls consistent with control-flow models
+may still manipulate application state~\cite{chen05:noncontrol} and
+can escape detection, in a manner analogous to mimicry attacks on
+intrusion-detection systems~\cite{wagner02:mimicry,tan03:hiding}. The
+primary differentiator of our approach from these previous works is
+soundness: only sequences of client messages that could have actually
+been produced through valid client execution, on the inputs sent by
+the server, will be accepted. This precision is accomplished though
+our use of symbolic execution (described below in
+\secref{ch:background:symbex}) to derive the complete implications of
+each message value to the client-side state. While this would hardly
+be tractable for any arbitrary client-server application, the
+control-loop structure of many clients that have frequent communication
+with the server can bound the amount of uncertainty that the \verifier
+faces in checking the client's messages.
+
+\subsubsection{Authoritative State}
+A different approach to protecting against client misbehavior in
+client-server settings is to ensure that clients manage no
+authoritative state that could affect the server or the larger
+application.  A  system for implementing web applications to have this
+property is Swift~\cite{chong07:swift}.  The extreme of this approach
+is for the client to simply forward all unseen inputs (e.g., user
+inputs) to the server, where a trusted copy of the client-side
+computation acts on these inputs directly; e.g., this is implemented
+for web applications in the Ripley system~\cite{vikram09:ripley}.  In
+contrast, our approach detects any client behavior that is
+inconsistent with legal client execution, without requiring that all
+low-level events be sent to the server. Our approach represents a
+middle ground in terms of programmer effort between automatic
+partitioning, which can require extensive manual annotation of the
+program~\cite{chong07:swift}, and client replication on the server,
+which requires less programmer effort, but more bandwidth to forward
+all inputs and greater server-side computation. Another consideration
+of moving all authoritative state to the server is that it is known to
+increase the bandwidth consumed by interactive applications owing to
+the need for every access to authoritative state to reach the server
+(e.g.,~\cite[p.~112]{mulligan03:guide}).
+
+\subsubsection{Auditing}
+If the preceding approach can be viewed as a ``pessimistic'' way of
+eliminating trust in the client to manage authoritative state, one
+might say an ``optimistic'' version was proposed by Jha et
+al.~\cite{jha07:integrity}.  Instead of moving authoritative state to
+a trusted server, a trusted {\em audit server} probabilistically
+audits the management of authoritative state at the client.  In this
+approach, each client periodically commits to its complete state by
+sending a cryptographic hash of it to the audit server.  If later
+challenged by the audit server, the client turns over the requested
+committed state and all information (client-to-server and
+server-to-client updates, user inputs) needed to re-trace and validate
+the client's behavior between this state and the next committed state.
+This approach, however, introduces additional costs to the client in
+the form of increased computation to cryptographically hash client
+state, storage to retain the information needed to respond to an
+audit, and bandwidth to transmit that information in the event of an
+audit.  Our approach introduces no additional client-side computation,
+client-side storage or client-server bandwidth.  Moreover,
+verification of clients in this scheme must be done {\em during} an
+active session, since clients cannot retain the needed information
+forever.  In contrast, our approach supports auditing at any time in
+the future by the server operator, provided that it records the needed
+messages (to which it already has access).
+
+\section{Verifying Distributed Systems}
+
+While the verification of client behavior in the domain of online
+games was the initial motivation for the work in this \dissertation,
+we argue that the proposed methods for verifying remote client
+misbehavior can be the first step in a framework for behavior verification in a
+larger class of distributed systems. Furthermore, the challenges of
+combating faulty or misbehaving nodes in distributed systems
+encompasses the challenges found in client-server systems but with
+increased complexity due the immense number of conditions that can
+arise due to asynchrony and partial failures. In this section, we
+place our behavior verification technique in the wider context of methods
+for testing and verifying distributed system implementations and
+behaviours. A key distinction to note is that in this dissertation we are
+not checking a model of the overall client-server implementation or
+formally verifying the implementation. Our proposals
+are concerned with verifying observed network behavior received from
+the client against a model derived from the client source code.
+
+\subsubsection{Model Checking}
+Model checking is a state space exploration method that can be used to
+enumerate all states or paths in a system for the purposes of
+verifying properties or specifications. Surveys on recent advances in
+software model checking are due to Jhala et
+al.~\cite{jhala09:modelchecking} and B{\'e}rard et
+al~\cite{berard13:modelchecking}. As mentioned above,
+our methods are related to model
+checking in that we use the client source code itself as a model for
+client behavior. 
+%In \chref{ch:scv} we demonstrate a technique for
+%verification that, in the spirit of model checking, enumerates all
+%paths under certain constraints. 
+Many advances in model checking have
+addressed the scaling challenges introduced as the space of possible
+configurations or states increases. In distributed systems this
+scaling challenge is particularly acute. Nevertheless, model checking
+approaches have been used to validate distributed system implementations.
+For example, the MODIST~\cite{yang09:modist} system allows discovery of bugs or 
+errors in unmodified binaries via an OS-level interposition layer
+that introduces all network or environmental actions in a distributed
+system. The model checking engine uses several search strategies to
+explore possible states which are instantiated by replaying actions.
+The OS-level interposition layer and heuristic search approach of
+MODIST is similar to our methods of behavior verification.
+However, unlike our techniques, MODIST has no notion of symbolic actions and
+thus the error conditions can only be triggered if the model checking
+engine introduces the appropriate sequence of actions. Another 
+approach, MACE~\cite{killian07:mace}, uses a high level language
+with primitives that impose restrictions and structure on how a
+distributed system can be written, while still allowing for efficient model
+checking at a high level. In contrast, our methods operate on
+pre-existing software. The above systems integrate model checking into
+the testing and development stages of distributed system design,
+while our proposed techniques observe and verify runtime behavior, namely
+the outputs of the client software as received by the verifier.
+Pip~\cite{reynolds06:pip} is a system that also allows for
+the verification of runtime behavior in a distributed system but
+differs from our work in that it requires the developers to define a
+specification for expected behavior, our work uses the client source
+code itself as the behavior model.
+
+\subsubsection{Software Verification}
+Recently, mechanically verified implementations of distributed
+systems have proven to be more robust and safe than ad-hoc
+implementations with accompanying hand-written proofs of correctness
+(e.g., for Byzantine fault tolerance algorithms~\cite{lamport11:paxos}
+or for the Chord distributed hash table~\cite{zave12:chord}). Systems
+for implementing formally verified software been built
+using domain-specific languages that enable formal verification, such
+as the Coq~\cite{bertot13:coq} interactive proof assistant and the
+TLA+~\cite{lamport02:tla} proof specification system. These
+implementations include OS kernels~\cite{gu15:dsc}, components of web
+browsers~\cite{ricketts14:afp} and distributed
+protocols (e.g., Verdi~\cite{wilcox15:verdi} and
+IronFleet~\cite{hawblitzel15:ironfleet}). In this \dissertation  we do
+not formally verify the overall client-server implementation itself
+for fault tolerance and liveness, but rather use the implementation of
+the remote software to verify observed network behavior. Our
+techniques are, in theory, compatible with existing methods for
+verifying distributed systems, and may provide additional security
+properties. The guarantees above are only as good as the assumptions made
+about the types of faults that may occur; some work formally verifies
+software under general network or system errors, but leaves out
+consideration of targeted attacks.
+
+\section{Verifiable Computation}
+The recent growth of cloud services and mobile devices has motivated
+research into the development of techniques for checking the
+correctness of results provided by an untrusted cloud service. This
+domain is related to the client behavior verification problem, but in
+reverse; a computationally weak client wishes to offload computation
+to a remote server or entity. The remote server however may return an
+incorrect result because of a fault or error, or there may be an
+incentive for the server to cheat by either not performing a costly
+computation or returning a result that is somehow beneficial to the
+server. The study of \emph{verifiable computation} is concerned with
+verifying that the result of some computation, performed by a cloud
+service or remote client, is provably correct.  Before the field of
+verifiable
+computation was formalized, early solutions for ensuring the integrity
+of outsourced computation did so via replication. The
+SETI@home~\cite{anderson02:seti} project outsources computational work
+for analysis of astronomical data and uses redundant computation on
+different clients to identify results that may be erroneous or
+malicious. Ideally, however, the outsourced work would be verified at
+a cost  that is smaller than performing the outsourced computation
+itself. A scheme for verifiable computation using abstractions from
+the theory of computation was first introduced by Generro et.
+al~\cite{gennaro10:non}. They defined a scheme that is a combination
+of fully homomorphic encryption~\cite{gentry09:fully} and Yao's
+garbled circuits~\cite{yao86:generate}. While impractical, this work
+showed that verifiable computation is achievable. Other work has
+improved this scheme, allowing for the outsourced task to be
+represented in a high level language that is transformed into an
+arithmetic circuit~\cite{parno13:pinocchio,vu13:hybrid,ben13:snarks}.
+Others use advances in interactive proofs~\cite{goldwasser08:muggles}
+or probabilistically checkable proofs~\cite{ishai07:efficient} to
+permit a verifier to probabilistically confirm that an outsourced
+computation was performed correctly. Verifiable computing has been
+studied in under several different assumptions and client-server
+configurations; including, multi-client
+outsourcing~\cite{choi13:multi}, computations on encrypted
+data~\cite{fiore14:encrypted} and biometric
+computations~\cite{blanton13:biometric}. Walfish et
+al.~\cite{walfish15:verifying} provide a useful survey of several
+approaches to verifiable computation with performance and
+implementation comparisons.
+
+There are several key differences between the solutions found in the
+area of verifiable computation and the proposals of this dissertation.
+While some improvements have been made (e.g.,
+Pinocchio~\cite{parno13:pinocchio}), current systems for verifiable
+computation induce significant overhead on the client and must be
+implemented in specialized languages to allow transformation into an
+arithmetic circuit representation. Such transformations can induce 
+an increase in the representation size that is exponential
+in the size of the input if the task contains a large
+number of loops or memory accesses. Our proposals do not induce any
+additional overhead on the client and can be implemented in any
+language that can be complied into a byte-code representation
+supported by the verifier (in our case, C). Secondly, while the
+techniques of verifiable computing could be generalized into
+supporting a wide variety of client-server applications, current
+verifiable computation systems would require existing implementations 
+to be rewritten.
+Our technique supports several classes of applications without any
+changes to preexisting message format and frequency. 
+
+\section{Symbolic Execution}
+\label{ch:background:symbex}
+
+Symbolic execution was introduced in the
+1970's~\cite{boyer75:select,king76:symbex}, but it has only recently
+become a practical and viable software tool. At a high level, symbolic
+execution is a way of ``executing'' a program while exploring all
+execution paths, for example to find bugs in the program.  Symbolic
+execution works by executing the software with its initial inputs
+specially marked so they are allowed to be ``anything'' --- the memory
+regions of the input are marked as symbolic and are not given any
+initial value.  The program is executed step-by-step, building
+constraints on the symbolic variables based on the program's
+operations on those variables.  For example, if the program sets
+$\symbexsum \gets \symbexadda+\symbexaddb$, where \symbexsum,
+\symbexadda, and \symbexaddb are all marked as symbolic, then after
+the operation, there will be a new logical constraint on the value of
+\symbexsum that states that it must equal the sum of \symbexadda and
+\symbexaddb. When the program conditionally branches on a symbolic
+value, execution forks and both program branches are followed, with
+the true branch forming a constraint that the symbolic value evaluates
+to true and the false branch forming the opposite constraint.  Using
+this strategy, symbolic execution can follow every possible code path
+in the target program, building a constraint for each one that must
+hold on execution of that path.
+Symbolic execution can help locate software bugs, for example, by
+providing constraints that enable a constraint solver to generate
+concrete inputs that cause errors to occur.  Specifically, if
+execution reaches an error condition (or a state thought to be
+``impossible''), then a constraint solver can use the constraints
+associated with that path to solve for a concrete input value that
+triggers the error condition. Having a concrete input that reliably
+reproduces an error is a great help when trying to correct the bug in
+the source code.
+
+\subsubsection{Applications for Security}
+Symbolic execution has seen significant interest in the
+security community for generating vulnerability
+signatures~\cite{brumley06:vulnsig,costa07:bouncer}, generating inputs that will
+induce error conditions~\cite{cadar06:exe,yang06:maldisks}, automating
+mimicry attacks~\cite{kruegel05:mimicry}, and optimizing
+privacy-preserving computations~\cite{wang09:genomic}, to name a few.
+The approach that we take to the behavior
+verification problem in this \dissertation is an application of symbolic
+execution.  In our case, we symbolically execute the client software with
+client-side inputs unknown to the server marked symbolic and then
+determine whether the messages received from the client violate the
+postconditions derived from the software. 
+
+\subsubsection{Applications for Software Testing}
+Among applications of symbolic execution, software testing has
+received the most research attention. Symbolic execution can be an
+effective method of increasing the degree of code coverage in a
+testing tool by generating test cases that cover a high percentage of
+paths in a program.  For example, \dart~\cite{godefroid05:dart} first
+concretely executes a program with an arbitrary input, recording the
+path constraint implied by its choice at each branch point.  The path
+constraint is then modified by negating a clause and a satisfying
+assignment to the constraint is found to derive a new input that will
+cover a different path in the program. More recent examples of this
+approach, which is also called {\em concolic}\ignore{\footnote{Concolic is a
+portmanteau of concrete and symbolic.}} execution, include
+\cute~\cite{sen05:cute}, \jpf~\cite{visser04:tig} and
+\pex~\cite{tillmann08:pex,anand08:demand}.  In contrast, our approach expands the
+verifier's search for paths to explain client messages as needed,
+starting from an initial collection of paths, but it does so without
+solving for inputs to exercise a path concretely and without the goal
+of achieving high path coverage.
+
+\subsubsection{Applications for Debugging}
+The applications of symbolic execution that are most related to our
+own are in debugging and diagnostics. Zamfir et
+al.~\cite{zamfir10:exesyn} developed a debugging tool that uses
+symbolic execution to reconstruct the likely path a program took
+before it crashed, from the core dump file recorded by the operating
+system when the crash occurred.  Their technique finds a feasible path
+or set of paths through a program that allow the program to reach the
+memory and process state that the core dump file indicates.
+\sherlog~\cite{yuan10:sherlog} is another error diagnosis tool that
+uses a log file instead of a core dump file to indicate how a program
+executed.  \sherlog performs path analysis (not symbolic execution per
+se, but a similar technique) to determine the likely execution paths
+and variable values implied by a given set of log files.  Similarly,
+symbolic execution has been used to discover the constraints for the
+paths through a program that reaches a vulnerability or error
+condition~\cite{brumley06:vulnsig,caballero09:vulnsig,cadar06:exe,yang06:maldisks}.
+Viewed through the lens of our work, the core dump file, log file,
+or error condition in these previous works is analogous to a ``client
+message'', and these tools similarly seek to find an execution that
+could explain it.  However, the structure of our verification task ---
+namely successively building an execution path to explain an entire
+sequence of messages --- and the performance demands that we seek to
+meet give rise to a technique which we believe to be novel.
+
+\subsubsection{Parallel Symbolic Execution}
+In \chref{ch:par}, we propose a method for behavior verification that
+is built upon a thread-level parallel extension to
+the \klee~\cite{cadar08:klee} symbolic execution framework. Other efforts have demonstrated the
+feasibility and performance benefits of parallelized symbolic
+execution engines \cite{bucur11:parallel, siddiqui10:parsym,
+staats10:pse}. Bucur et al. demonstrated a parallelization approach
+that divides the symbolic execution work across multiple processes or
+worker nodes. In contrast, we propose a shared memory design, rather
+than a message passing approach, that has several advantages for the
+application of behavior verification. A shared memory approach better leverages opportunities
+to make symbolic execution optimizations that include: identification
+of duplicate states, utilization of symbolic state merging and shared
+constraint solving structures. 
+Furthermore, during load-balancing in the Bucur et al. method,
+symbolic execution tasks are re-executed rather than transferred
+between processes. For testing at scale, the overhead of this
+redundant work is reasonable,
+but not for our unique application of symbolic execution.
+Additionally, our shared memory approach uses
+global knowledge of the progress of each execution path
+under consideration to make more informed decisions
+about which execution paths to explore next.
+

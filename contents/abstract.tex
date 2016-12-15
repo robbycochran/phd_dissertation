@@ -1,0 +1,22 @@
+A malicious client in a distributed system can undermine the integrity
+of the larger distributed application in a number of different ways.
+For example, a server with a vulnerability may be compromised directly
+by a modified client. If a client is authoritative for state in the
+larger distributed application, a malicious client may transmit an
+altered version of this state throughout the distributed application.
+A player in a networked game might cheat by modifying the client
+executable or the user of a network service might craft a sequence of
+messages that exploit a vulnerability in a server application. We
+present symbolic client verification, a technique for detecting
+whether network traffic from a remote client could have been generated
+by sanctioned software. Our method is based on constraint solving and
+symbolic execution and uses the client source code as a model for
+expected behavior. By identifying possible execution paths a remote
+client may have followed to generate a particular sequence of network
+traffic, we enable a precise verification technique that has the
+benefits of requiring little to no modification to the client
+application and is server agnostic; the only required inputs to the
+algorithm are the observed network traffic and the client source code.
+We demonstrate  a parallel symbolic client verification algorithm that
+vastly reduces verification costs for our case study applications
+\xpilot and \tetrinet. 

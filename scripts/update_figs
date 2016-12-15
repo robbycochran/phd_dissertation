@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Buildbot directory
+#BBDIR=/playpen/buildbot/slave/parallel/data/results
+BBDIR=/playpen/rac/cliver/data/results
+DEST_DIR=figures/parallel
+FILETYPE=eps
+
+PLOTS=(
+%s_%s-%d_%s_boxplot_bar_alt
+%s_%s-%d_%s_boxplot_bar_alt_log
+)
+
+THREAD_COUNTS=(16 8 1)
+YAXIS=(Time Delay)
+MODES=(ed)
+
+copy_plots() {
+  local client=$1
+  local client_short=$2
+  local plots_dir=$BBDIR/$client/plots/NDSS2013V2
+  local curr_dir=$(pwd)
+  cd $plots_dir
+  local plots_dir_recent=$plots_dir/$(ls -td */ | head -1)
+  cd $curr_dir
+
+  for p in ${PLOTS[@]} ; do
+    for m in ${MODES[@]} ; do
+      for t in ${THREAD_COUNTS[@]} ; do
+        for y in ${YAXIS[@]} ; do
+          printf -v pname "$p.%s" $client_short $m $t $y $FILETYPE
+          #ls -al $plots_dir_recent/$pname
+          cp $plots_dir_recent/$pname $DEST_DIR/
+          echo "Copying " $plots_dir_recent/$pname " -> "  $DEST_DIR/
+          #convert $plots_dir_recent/$p $DEST_DIR/$(basename $p .png).eps
+        done
+      done
+    done
+  done
+}
+
+copy_plots xpilot-ng-x11-klee xpilot
+copy_plots tetrinet-klee tetrinet

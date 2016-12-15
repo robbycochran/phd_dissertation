@@ -1,0 +1,41 @@
+\chapter{Conclusion}
+\label{ch:conclusion}
+We have presented a technique to detect any type of malicious behavior
+that causes a remote client to exhibit behavior, as seen by the
+server, that is inconsistent with the sanctioned client software and
+the client state known at the server.  Our technique discerns whether
+there was  any possible sequence of user inputs to the sanctioned
+client software that could have given rise to each message received at
+the server, given what the server knew about the client based on
+previous messages from the client and the messages the server sent to
+the client. In doing so, our approach remedies the previously
+heuristic and manual construction of server-side checks. We have also
+presented a verification technique that validates legitimate client
+behavior (as being consistent with the sanctioned client software)
+sufficiently fast to keep pace with the application itself as
+demonstrated in two case studies in the context of online games. The
+parallel implementation of symbolic client verification could be used
+to prevent malicious messages from ever reaching a vulnerable server
+if used to verify client messages before they are processed. Our
+technique for verification operates without encumbering the
+application with substantially more bandwidth use and without
+sacrificing accuracy. 
+
+%In \chref{ch:scv}...
+%In \chref{ch:guided}...
+%In \chref{ch:par}...
+%
+%%\paragraph{Limitations}
+%%\paragraph{Symbolic Execution}
+%\paragraph{Future Work}
+%%That is, any conclusion reached as to whether
+%%the sequence of client behaviors could, in fact, have been produced
+%%from the sanctioned client software is correct. 
+%A recent approach to generating weakest preconditions has shown
+%promise as a more efficient alternative to symbolic execution in some
+%applications~\cite{brumley07:wp,jager10:directionless}
+%an application of this technique to our problem to might make
+%client checking more efficient.
+
+
+

@@ -1,0 +1,41 @@
+%\setlength{\marginparwidth}{.80in}
+%\let\oldmarginpar\marginpar
+%\renewcommand\marginpar[1]{\-\oldmarginpar[\raggedleft\footnotesize #1]%
+%{\raggedright\footnotesize #1}}
+%\newcommand{\NOTE}[1]{\makebox[0cm]{$\bigotimes$}\marginpar{\tiny
+%    \textcolor{red}{#1}}}
+
+\newcommand{\ignore}[1]{}
+\newcounter{note}[section]
+\renewcommand{\thenote}{\thesection.\arabic{note}}
+\newcommand{\notecolor}{blue}
+%\newcommand{\mkr}[1]{\refstepcounter{note}{\bf \textcolor{\notecolor}{$\ll$MKR~\thenote: {\sf #1}$\gg$}}}
+%\newcommand{\rac}[1]{\refstepcounter{note}{\bf \textcolor{\notecolor}{$\ll$RAC~\thenote: {\sf #1}$\gg$}}}
+\newcommand{\mkr}[1]{}
+\newcommand{\rac}[1]{}
+
+\newcommand{\mypara}[1]{\vspace{3pt}\noindent{\bf {#1}~~}}
+\newcommand{\secref}[1]{Section~\ref{#1}\xspace}
+\newcommand{\secrefs}[2]{Sections~\ref{#1}--\ref{#2}\xspace}
+\newcommand{\figrefi}[2]{Figure~\ref{#1}(#2)\xspace}
+\newcommand{\figref}[1]{Figure~\ref{#1}\xspace}
+\newcommand{\chref}[1]{Chapter~\ref{#1}\xspace}
+\newcommand{\chrefs}[2]{Chapters~\ref{#1} and~\ref{#2}\xspace}
+
+
+%\newenvironment{packeditemize}{
+%\begin{list}{$\bullet$}{
+%\setlength{\labelwidth}{8pt}
+%\setlength{\itemsep}{0pt}
+%\setlength{\leftmargin}{\labelwidth}
+%\addtolength{\leftmargin}{\labelsep}
+%\setlength{\parindent}{0pt}
+%\setlength{\listparindent}{\parindent}
+%\setlength{\parsep}{0pt}
+%\setlength{\topsep}{3pt}}}{\end{list}}
+
+\newcounter{lineNmbr}
+\renewcommand{\thelineNmbr}{\ensuremath{\mathsf{\arabic{lineNmbr}}}}
+\newcommand{\lineLabel}[1]{\refstepcounter{lineNmbr}\label{#1}\thelineNmbr.\hspace{1.35em}}
+\newcommand{\lineNoLabel}{\refstepcounter{lineNmbr}\thelineNmbr.\hspace{1.35em}}
+

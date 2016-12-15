@@ -1,0 +1,142 @@
+\documentclass[11pt,letterpaper,twoside]{report}
+
+% Layout
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage[subfigure]{tocloft}
+
+% Macro support
+\usepackage{xspace}
+
+%% Text
+%\usepackage{mathpazo}
+\usepackage{tgpagella}
+%\usepackage{mathptmx} % Use for Times New Roman
+%\usepackage[scaled=.90]{helvet}
+\usepackage{helvet}
+%\usepackage[T1]{fontenc}
+\usepackage{courier}
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+\usepackage{relsize}
+
+\usepackage{siunitx}
+\usepackage{color}
+\usepackage{verbatim}
+\usepackage{microtype}
+
+
+% UNC Grad school requires all paragraphs indented after section titles
+\usepackage{indentfirst}
+
+% Chapter quotes
+%\usepackage{epigraph}
+
+% Bibilography
+\usepackage{natbib}
+
+% Avoid widow lines
+\usepackage[all]{nowidow}
+
+% Links
+\usepackage[hyphens]{url}
+\usepackage[
+  bookmarksnumbered=true,
+  bookmarksopen=true,
+  bookmarksdepth=2,
+  pdftitle={Symbolic Verification of Client Behavior in Distributed Systems},
+  pdfauthor={Robert A. Cochran III},
+  hidelinks
+]{hyperref}
+\hypersetup{breaklinks=true}
+\usepackage[hyphenbreaks]{breakurl}
+
+%Smaller url font
+\renewcommand*{\UrlFont}{\ttfamily\smaller\relax}
+
+% Math
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{xxexample}{Example}[chapter]
+
+%% "inherent" from xxexample, but place box at the end of example.
+\newenvironment{example}{
+\begin{xxexample}
+}{
+\rightparend{$\Diamond$}
+\end{xxexample}
+}
+% \qed   \sqbullet \blackdiamond \vartriangleleft
+
+% Layout
+\usepackage{hhline} % this is for my tables -SBL
+\usepackage{float}
+
+% Figures
+\usepackage{epsfig}
+\usepackage{wrapfig}
+%\usepackage[FIGTOPCAP]{subfigure}
+\usepackage{subfigure}
+\usepackage{listings}
+\usepackage[font=small,labelfont=bf,labelsep=period,justification=centerlast]{caption}
+%\usepackage{graphicx}
+%\usepackage{subcaption}
+
+% Macro support
+\usepackage{xspace}
+\usepackage{xargs}
+\usepackage{calc}
+
+% Footnotes
+\usepackage[hang,flushmargin]{footmisc} 
+
+% Algorithm
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+%\usepackage{algpseudocode}
+\renewcommand\thealgorithm{}
+\makeatletter
+\newcommand{\setalglineno}[1]{%
+  \setcounter{ALG@line}{\numexpr#1-1}}
+\makeatother
+
+\input{common/layout}
+
+\input{common/macros}
+
+% Package customization and layout modifiers
+\input{contents/layout}
+
+% Commands for notes, references, etc.
+\input{contents/commands}
+
+% Document Terms
+\input{contents/terms}
+
+%% Flush words right at end of paragraph.
+%% From: http://tex.stackexchange.com/questions/16330/hfill-after-linebreak
+\newcommand\rightparend[1]{{%
+      \unskip\nobreak\hfil\penalty50
+      \hskip2em\hbox{}\nobreak\hfil\textbf{#1}%
+      \parfillskip=0pt \finalhyphendemerits=0 \par}}
+
+\begin{document}
+
+% Title page, TOC, etc.
+\input{frontmatter/pages}
+
+% Chapters
+\input{contents/introduction}
+\input{contents/background}
+\input{contents/tissec}
+\input{contents/ndss13}
+\input{contents/parallel}
+\input{contents/conclusion}
+
+% Bibliography
+\input{common/references}
+
+\end{document}

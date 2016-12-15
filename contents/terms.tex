@@ -1,0 +1,426 @@
+
+%%% Thesis Definintions
+\newcommand{\dissertation}{dissertation\xspace}
+\newcommand{\Dissertation}{Dissertation\xspace}
+\newcommand{\paper}{chapter\xspace}
+\newcommand{\papers}{chapters\xspace}
+\newcommand{\Paper}{Chapter\xspace}
+\newcommand{\Papers}{Chapters\xspace}
+
+%%% TISSEC Command Definitions
+
+\newcommand{\figurewidth}{14em}
+
+\newcommand{\roundidx}{\ensuremath{i}\xspace}
+\newcommand{\genidx}{\ensuremath{j}\xspace}
+\newcommand{\conjunctidx}{\ensuremath{k}\xspace}
+\newcommand{\numconjuncts}{\ensuremath{n}\xspace}
+\newcommand{\conjunct}{\ensuremath{c}\xspace}
+\newcommand{\clientMsg}{\ensuremath{\mathit{msg}}\xspace}
+\newcommand{\msgConstraint}{\ensuremath{\mathsf M}\space}
+\newcommand{\msgPathConstraint}{\ensuremath{\mathsf P}\space}
+\newcommand{\execPathConstraint}{\ensuremath{\mathsf C}\xspace}
+\newcommand{\execPathConstraints}{\ensuremath{\displaystyle \mathlarger{\mathpzc C}}\xspace}
+\newcommand{\newExecPathConstraint}{\ensuremath{\execPathConstraint'}\xspace}
+\newcommand{\genericPathConstraint}{\ensuremath{\mathsf G}\xspace}
+%\newcommand{\genericPathConstraints}{\ensuremath{{\mbox{\large{\mathpzc G}}}}\xspace}
+\newcommand{\genericPathConstraints}{\ensuremath{\displaystyle \mathlarger{\mathpzc G}}\xspace}
+\newcommand{\msgToConstraint}{\ensuremath{\mathsf{msgToConstraint}}\xspace}
+\newcommand{\isSatisfiable}{\ensuremath{\mathsf{isSatisfiable}}\xspace}
+
+% Vocabulary
+\newcommand{\verifier}{verifier\xspace}
+
+\newcommand{\inputcon}{user-input constraint\xspace}
+\newcommand{\inputcons}{user-input constraints\xspace}
+\newcommand{\Inputcon}{User-input constraint\xspace}
+\newcommand{\Inputcons}{User-input constraints\xspace}
+
+\newcommand{\packetcon}{packet-processing constraint\xspace}
+\newcommand{\packetcons}{packet-processing constraints\xspace}
+\newcommand{\Packetcon}{Packet-processing constraint\xspace}
+\newcommand{\Packetcons}{Packet-processing constraints\xspace}
+
+\newcommand{\framecon}{frame-processing constraint\xspace}
+\newcommand{\framecons}{frame-processing constraints\xspace}
+\newcommand{\Framecon}{frame-processing constraint\xspace}
+\newcommand{\Framecons}{frame-processing constraints\xspace}
+
+\newcommand{\pathsegcon}{round constraint\xspace}
+\newcommand{\pathsegcons}{round constraints\xspace}
+\newcommand{\Pathsegcon}{Round constraint\xspace}
+\newcommand{\PathsegCons}{Round Constraints\xspace}
+\newcommand{\Pathsegcons}{Round constraints\xspace}
+\newcommand{\execpathcon}{accumulated constraint\xspace}
+\newcommand{\execpathcons}{accumulated constraints\xspace}
+\newcommand{\Execpathcon}{Accumulated constraint\xspace}
+\newcommand{\Execpathcons}{Accumulated constraints\xspace}
+\newcommand{\genpathcon}{generic path-segment constraint\xspace}
+\newcommand{\genpathcons}{generic path-segment constraints\xspace}
+\newcommand{\Genpathcon}{Generic path-segment constraint\xspace}
+\newcommand{\Genpathcons}{Generic path-segment constraints\xspace}
+\newcommand{\GENPATHCONS}{Generic Path-Segment Constraints\xspace}
+\newcommand{\constraintsfor}[1]{\ensuremath{\mathrm{constraints\_for}(#1)}\xspace}
+
+\newcommand{\Eager}{Eager\xspace}
+\newcommand{\eager}{eager\xspace}
+\newcommand{\Lazy}{Lazy\xspace}
+\newcommand{\lazy}{lazy\xspace}
+
+\newcommand{\servermsgvar}{\ensuremath{\mathit{svrmsg}}\xspace}
+\newcommand{\servermsgval}{\ensuremath{m}\xspace}
+
+\newcommand{\thread}{active path\xspace}
+\newcommand{\threads}{active paths\xspace}
+
+\newcommand{\send}{{\tt send()}\xspace}
+\newcommand{\recv}{{\tt recv()}\xspace}
+
+\newcommand{\loopIterations}{\ensuremath{n}\xspace}
+
+% XPilot
+\newcommand{\keyfireshot}{\texttt{\small KEY\_FIRE\_SHOT}\xspace}
+\newcommand{\keyshield}{\texttt{\small KEY\_SHIELD}\xspace}
+\newcommand{\pktstart}{\texttt{\small PKT\_START}\xspace}
+\newcommand{\pktitem}{\texttt{\small PKT\_ITEM}\xspace}
+\newcommand{\pktfuel}{\texttt{\small PKT\_FUEL}\xspace}
+\newcommand{\pkttimeleft}{\texttt{\small PKT\_TIME\_LEFT}\xspace}
+\newcommand{\pktend}{\texttt{\small PKT\_END}\xspace}
+\newcommand{\packettype}{\ensuremath{p}\xspace}
+\newcommand{\packetgenconstraints}{\ensuremath{\mathrm{PKT\_GENERIC\_CONSTRAINTS}}\xspace}
+
+% Ack scheme for XPilot
+\newcommand{\cToSNbr}{\ensuremath{\mathit{c2sNbr}}\xspace}
+\newcommand{\cToSAckd}{\ensuremath{\mathit{c2sAckd}}\xspace}
+\newcommand{\sToCNbr}{\ensuremath{\mathit{s2cNbr}}\xspace}
+\newcommand{\sToCAckd}{\ensuremath{\mathit{s2cAckd}}\xspace}
+\newcommand{\loopAckd}{\ensuremath{\mathit{loopAckd}}\xspace}
+\newcommand{\lateMsgs}[1]{\ensuremath{\mathit{lateMsgs}[{#1}]}\xspace}
+\newcommand{\symbSeq}[1]{\ensuremath{\mathit{eventSeq}[{#1}]}\xspace}
+\newcommand{\symbLoop}{\ensuremath{\mathtt{Loop}}\xspace}
+\newcommand{\symbLoopCtr}{\ensuremath{j}\xspace}
+\newcommand{\symbSent}{\ensuremath{\mathtt{Send}}\xspace}
+\newcommand{\symbSentCtr}{\ensuremath{j}\xspace}
+\newcommand{\symbRcvd}{\ensuremath{\mathtt{Recv}}\xspace}
+\newcommand{\symbSkip}{\ensuremath{\mathtt{Skip}}\xspace}
+\newcommand{\symbRorSCtr}{\ensuremath{j}\xspace}
+\newcommand{\symbLate}{\ensuremath{\mathtt{Late}}\xspace}
+\newcommand{\symbLateCtr}{\ensuremath{j}\xspace}
+
+% Toy algorithm
+\newcommand{\toyloc}{\ensuremath{loc}\xspace}
+\newcommand{\toyoldloc}{\ensuremath{prev\_loc}\xspace}
+\newcommand{\toykey}{\ensuremath{key}\xspace}
+\newcommand{\toyreadkey}{\ensuremath{\mathsf{readkey}}\xspace}
+\newcommand{\toysend}{\ensuremath{\mathsf{sendlocation}}\xspace}
+\newcommand{\toysymvar}{\ensuremath{\mathsf{symbolic}}\xspace}
+\newcommand{\toyendgame}{\ensuremath{\mathsf{endgame}}\xspace}
+\newcommand{\toybreak}{\ensuremath{\mathsf{breakpoint}}\xspace}
+\newcommand{\toyup}{\ensuremath{\mbox{`$\uparrow$'}}\xspace}
+\newcommand{\toydown}{\ensuremath{\mbox{`$\downarrow$'}}\xspace}
+\newcommand{\toyesc}{\ensuremath{\mathrm{ESC}}\xspace}
+\newcommand{\toyMsg}{\ensuremath{msg}\xspace}
+
+% Symbolic execution example
+\newcommand{\symbexsum}{\ensuremath{a}\xspace}
+\newcommand{\symbexadda}{\ensuremath{b}\xspace}
+\newcommand{\symbexaddb}{\ensuremath{c}\xspace}
+
+% Message lost macros
+\newcommand{\hashsize}{\ensuremath{16}\xspace}
+\newcommand{\bitidx}{\ensuremath{k}\xspace}
+
+% Tetrinet
+\newcommand{\tetrinetHorizontal}{\ensuremath{x}\xspace}
+\newcommand{\tetrinetVertical}{\ensuremath{y}\xspace}
+\newcommand{\tetrinetOrientation}{\ensuremath{z}\xspace}
+\newcommand{\tetrinetUnabridgedFreq}{\ensuremath{k}\xspace}
+
+
+%%% NDSS13 Command Definitions
+
+\newcommand{\ageofempires}{{\it Age of Empires}\xspace}
+\newcommand{\americasarmy}{{\it America's Army}\xspace}
+\newcommand{\asteroids}{{\it Asteroids}\xspace}
+\newcommand{\blizzard}{Blizzard Entertainment\xspace}
+\newcommand{\capman}{{\it Cap-Man}\xspace}
+\newcommand{\cliver}{{\sc cliver}\xspace}
+\newcommand{\cute}{{\it CUTE}\xspace}
+\newcommand{\dart}{{\it DART}\xspace}
+\newcommand{\freeciv}{{\it Freeciv}\xspace}
+\newcommand{\gearsofwar}{{\it Gears of War}\xspace}
+\newcommand{\jpf}{{\it JPF}\xspace}
+\newcommand{\klee}{{\sc klee}\xspace}
+\newcommand{\llvm}{{\sc llvm}\xspace}
+\newcommand{\meridian}{{\it Meridian 59}\xspace}
+\newcommand{\minesweeper}{{\it Minesweeper}\xspace}
+\newcommand{\ncurses}{\texttt{ncurses}\xspace}
+\newcommand{\pacman}{{\it Pac-Man}\xspace}
+\newcommand{\pex}{{\it Pex}\xspace}
+\newcommand{\pong}{{\it Pong}\xspace}
+\newcommand{\punkbuster}{{\it PunkBuster}\xspace}
+\newcommand{\quake}{{\it Quake~3 Arena}\xspace}
+\newcommand{\ripley}{{\it Ripley}\xspace}
+\newcommand{\sherlog}{{\it SherLog}\xspace}
+\newcommand{\stp}{{\sc stp}\xspace}
+\newcommand{\swift}{{\it Swift}\xspace}
+\newcommand{\tetrinet}{{\it TetriNET}\xspace}
+\newcommand{\tetris}{{\it Tetris}\xspace}
+\newcommand{\uclibc}{\texttt{uClibc}\xspace}
+\newcommand{\warden}{{\it Warden}\xspace}
+\newcommand{\wow}{{\it World of Warcraft}\xspace}
+\newcommand{\vac}{{\it VAC}\xspace}
+\newcommand{\valve}{{\it Valve}\xspace}
+\newcommand{\xlib}{\texttt{Xlib}\xspace}
+\newcommand{\xpilot}{{\it XPilot}\xspace}
+\newcommand{\xpilotng}{{\it XPilot NG}\xspace}
+
+% Units
+\newcommand{\secs}{\ensuremath{\mathrm{s}}\xspace}
+\newcommand{\msecs}{\ensuremath{\mathrm{ms}}\xspace}
+
+% Notation
+\newcommand{\msg}[1]{\ensuremath{\mathit{msg}_{#1}}\xspace}
+\newcommand{\msgIdx}{\ensuremath{i}\xspace}
+\newcommand{\msgNmbr}{\ensuremath{n}\xspace}
+\newcommand{\posixSend}{{\tt send()}\xspace}
+\newcommand{\posixRecv}{{\tt recv()}\xspace}
+\newcommand{\posixSelect}{{\tt select()}\xspace}
+\newcommand{\posixGetCh}{{\tt getch()}\xspace}
+\newcommand{\selInstr}{{\sc select}\xspace}
+\newcommand{\sendInstr}{{\sc send}\xspace}
+\newcommand{\recvInstr}{{\sc recv}\xspace}
+\newcommand{\execPrefix}[1]{\ensuremath{\Pi_{#1}}\xspace}
+\newcommand{\execPrefixAlt}[1]{\ensuremath{\hat{\Pi}_{#1}}\xspace}
+\newcommand{\execPrefixBFS}[1]{\ensuremath{\Pi^{+}_{#1}}\xspace}
+\newcommand{\execPrefixBFSAlt}[1]{\ensuremath{\hat{\Pi}^{+}_{#1}}\xspace}
+\newcommand{\symState}[1]{\ensuremath{\sigma_{#1}}\xspace}
+\newcommand{\symStateAlt}[1]{\ensuremath{\hat{\sigma}_{#1}}\xspace}
+\newcommand{\symStateBFS}[1]{\ensuremath{\sigma^{+}_{#1}}\xspace}
+\newcommand{\symStateBFSAlt}[1]{\ensuremath{\hat{\sigma}^{+}_{#1}}\xspace}
+\newcommand{\trainingFrags}[1]{\ensuremath{\Phi_{#1}}\xspace}
+\newcommand{\trainingFragsAlt}[1]{\ensuremath{\hat{\Phi}_{#1}}\xspace}
+\newcommand{\trainingFrag}{\ensuremath{\phi}\xspace}
+\newcommand{\trainingFragAlt}{\ensuremath{\phi'}\xspace}
+\newcommand{\trainingFragLimit}{\ensuremath{\beta}\xspace}
+\newcommand{\clusters}{\ensuremath{k}\xspace}
+\newcommand{\prefixOf}{\ensuremath{\sqsubseteq}\xspace}
+\newcommand{\closestMsgDist}{\ensuremath{m}\xspace}
+\newcommand{\radiusExpansion}{\ensuremath{\alpha}\xspace}
+\newcommand{\closeMsgs}[2]{\ensuremath{M_{#1}^{#2}}\xspace}
+
+% Evaluation Parameters
+\newcommand{\coarseClusterCount}{\ensuremath{256}\xspace}
+\newcommand{\xpilotFineClusterCount}{\ensuremath{475}\xspace}
+\newcommand{\tetrinetFineClusterCount}{\ensuremath{3790}\xspace}
+\newcommand{\logTetrinetFineClusterCount}{\ensuremath{12}\xspace}
+\newcommand{\logXpilotFineClusterCount}{\ensuremath{9}\xspace}
+\newcommand{\tetrinetTraces}{\ensuremath{20}\xspace}
+\newcommand{\xpilotTraces}{\ensuremath{40}\xspace}
+\newcommand{\tetrinetTraceLength}{\ensuremath{240}\xspace}
+\newcommand{\xpilotTraceLength}{\ensuremath{2100}\xspace}
+\newcommand{\tetrinetTraceMins}{\ensuremath{6.5}\xspace}
+\newcommand{\xpilotTraceSecs}{\ensuremath{70}\xspace}
+\newcommand{\tetrinetFineBandwidthPerc}{\ensuremath{17\%}\xspace}
+\newcommand{\tetrinetCoarseBandwidthPerc}{\ensuremath{9\%}\xspace}
+\newcommand{\xpilotFineBandwidthPerc}{\ensuremath{4\%}\xspace}
+\newcommand{\xpilotCoarseBandwidthPerc}{\ensuremath{2\%}\xspace}
+\newcommand{\xpilotMsgsPerSec}{\ensuremath{32}\xspace}
+\newcommand{\xpilotInterMessageDelay}{\ensuremath{31.5\msecs}\xspace}
+\newcommand{\tetrinetInterMessageDelay}{\ensuremath{1.6\secs}\xspace}
+
+%% Algorithm macros
+\newcommand{\codeIf}{\ensuremath{\mathbf{if}}\xspace}
+\newcommand{\codeThen}{\ensuremath{\mathbf{then}}\xspace}
+\newcommand{\codeElse}{\ensuremath{\mathbf{else}}\xspace}
+\newcommand{\codeWhile}{\ensuremath{\mathbf{while}}\xspace}
+\newcommand{\codeFalse}{\ensuremath{\textbf{false}}\xspace}
+\newcommand{\codeTrue}{\ensuremath{\textbf{true}}\xspace}
+\newcommand{\codeAnd}{\ensuremath{\textbf{and}}\xspace}
+\newcommand{\codeReturn}{\ensuremath{\mathbf{return}}\xspace}
+
+\newcommand{\naiveAlg}{\ensuremath{\mathsf{Random}}\xspace}
+\newcommand{\verifyAlg}{\ensuremath{\mathsf{verify}}\xspace}
+\newcommand{\verifyDFSAlg}{\ensuremath{\mathsf{consumeS2C}}\xspace}
+\newcommand{\liveSet}{\ensuremath{\mathsf{Live}}\xspace}
+\newcommand{\node}{\ensuremath{\mathsf{nd}}\xspace}
+\newcommand{\Node}{\ensuremath{\mathsf{Node}}\xspace}
+\newcommand{\nodeAlt}{\ensuremath{\node'}\xspace}
+\newcommand{\childField}[1]{\ensuremath{\mathsf{child}_{#1}}\xspace}
+\newcommand{\pathField}{\ensuremath{\mathsf{path}}\xspace}
+\newcommand{\stateField}{\ensuremath{\mathsf{state}}\xspace}
+\newcommand{\editDist}{\ensuremath{\mathsf{editDist}}\xspace}
+\newcommand{\constraints}{\ensuremath{\mathsf{constraints}}\xspace}
+\newcommand{\isSymbolicBranch}{\ensuremath{\mathsf{isSymbolicBranch}}\xspace}
+\newcommand{\isIOInstruction}{\ensuremath{\mathsf{isNetInstr}}\xspace}
+\newcommand{\newState}{\ensuremath{\sigma}\xspace}
+\newcommand{\newPath}{\ensuremath{\pi}\xspace}
+\newcommand{\nextInstruction}{\ensuremath{\mathsf{next}}\xspace}
+\newcommand{\execStep}{\ensuremath{\mathsf{execStep}}\xspace}
+\newcommand{\makeNode}{\ensuremath{\mathsf{makeNode}}\xspace}
+\newcommand{\messageVar}{\ensuremath{\mathsf{msg}}\xspace}
+\newcommand{\failure}{\ensuremath{\mathit{failure}}\xspace}
+\newcommand{\condition}{\ensuremath{\mathsf{cond}}\xspace}
+\newcommand{\stringOne}{\ensuremath{s_1}\xspace}
+\newcommand{\stringTwo}{\ensuremath{s_2}\xspace}
+\newcommand{\editDistThreshold}{\ensuremath{t}\xspace}
+\newcommand{\maxEditDistVal}{\ensuremath{d_{\mathrm{max}}}\xspace}
+\newcommand{\trainingFragClosest}{\ensuremath{\trainingFrag^*}\xspace}
+
+\newcommand{\xval}{\ensuremath{x}\xspace}
+
+%%%% Parallel Verification Terms %%%%
+\newcommand{\worker}{{\it worker}\xspace}
+\newcommand{\codeFor}{\ensuremath{\mathbf{for}}\xspace}
+\newcommand{\codeSpawn}{\ensuremath{\mathbf{spawn}}\xspace}
+\newcommand{\codeSync}{\ensuremath{\mathbf{sync}}\xspace}
+\newcommand{\codeAtomic}{\ensuremath{\mathbf{atomic}}\xspace}
+\newcommand{\readyQ}{\ensuremath{\mathsf{Q}_{R}}\xspace}
+\newcommand{\addedQ}{\ensuremath{\mathsf{Q}_{A}}\xspace}
+\newcommand{\verifyFinished}{\ensuremath{\mathsf{Finished}}\xspace}
+\newcommand{\validPath}{\ensuremath{\mathsf{ValidPath}}\xspace}
+\newcommand{\validState}{\ensuremath{\mathsf{Valid}}\xspace}
+\newcommand{\validStates}{\ensuremath{\mathsf{ValidStates}}\xspace}
+\newcommand{\activeCount}{\ensuremath{\mathsf{Active}}\xspace}
+\newcommand{\workerCount}{\ensuremath{\mathsf{NumWorkers}}\xspace}
+\newcommand{\makeNodeQueue}{\ensuremath{\mathsf{makeNodeQueue}}\xspace}
+\newcommand{\makeStateVector}{\ensuremath{\mathsf{makeStateVector}}\xspace}
+\newcommand{\enqueue}{\ensuremath{\mathsf{enqueue}}\xspace}
+\newcommand{\queueClear}{\ensuremath{\mathsf{clear}}\xspace}
+\newcommand{\dequeue}{\ensuremath{\mathsf{dequeue}}\xspace}
+\newcommand{\tryDequeue}{\ensuremath{\mathsf{dequeue}}\xspace}
+\newcommand{\parallelVerifyAlg}{\ensuremath{\mathsf{ParallelVerify}}\xspace}
+\newcommand{\clusterSelector}{\ensuremath{\mathsf{TrainingSelector}}\xspace}
+\newcommand{\nodeScheduler}{\ensuremath{\mathsf{NodeScheduler}}\xspace}
+\newcommand{\selectNode}{\ensuremath{\mathsf{SelectNode}}\xspace}
+\newcommand{\verifyWorker}{\ensuremath{\mathsf{VerifyWorker}}\xspace}
+\newcommand{\atomicIncrement}{\ensuremath{\mathsf{atomicIncrement}}\xspace}
+\newcommand{\atomicDecrement}{\ensuremath{\mathsf{atomicDecrement}}\xspace}
+
+%%%% evaluation
+\newcommand{\timestamp}{\ensuremath{t}\xspace}
+\newcommand{\cost}[1]{\ensuremath{\mathit{cost}({#1})}\xspace}
+\newcommand{\lag}[1]{\ensuremath{\mathit{delay}({#1})}\xspace}
+\newcommand{\completion}[1]{\ensuremath{\mathsf{T}_\mathit{comp}({#1})}\xspace}
+\newcommand{\arrival}[1]{\ensuremath{\mathsf{T}_\mathit{arr}({#1})}\xspace}
+
+\newcommand{\msgPerm}{\ensuremath{\rho}\xspace}
+\newcommand{\msgIdxAlt}{\ensuremath{i'}\xspace}
+
+\newcommand{\msgTrace}{\ensuremath{\msg{0}, \msg{1}, \ldots,\msg{\msgNmbr}}\xspace}
+%\newcommand{\msgTrace}[1]{\ensuremath{\msg{0}, \msg{1}, \ldots,\msg{\msgNmbr}}\xspace}
+
+% data types
+\newcommand{\SymbolicStateType}{\ensuremath{\mathsf{SymbolicState}}\xspace}
+\newcommand{\ExecutionFragmentType}{\ensuremath{\mathsf{ExecutionFragment}}\xspace}
+\newcommand{\NodeType}{\ensuremath{\mathsf{Node}}\xspace}
+\newcommand{\ExecutionFragment}{\textbf{struct}\xspace}
+
+\newcommand{\Struct}{\textbf{struct}\xspace}
+\newcommand{\Spawn}{\textbf{spawn}\xspace}
+\newcommand{\Atomic}{\textbf{atomic}\xspace}
+\newcommand{\Sync}{\textbf{sync}\xspace}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+
+
+
+%
+%\newcommand{\sherlog}{{\it SherLog}\xspace}
+%\newcommand{\dart}{{\it DART}\xspace}
+%\newcommand{\swift}{{\it Swift}\xspace}
+%\newcommand{\cute}{{\it CUTE}\xspace}
+%\newcommand{\jpf}{{\it JPF}\xspace}
+%\newcommand{\pex}{{\it Pex}\xspace}
+%\newcommand{\ripley}{{\it Ripley}\xspace}
+%
+%% Units
+%\newcommand{\secs}{\ensuremath{\mathrm{s}}\xspace}
+%\newcommand{\msecs}{\ensuremath{\mathrm{ms}}\xspace}
+%
+%% Notation
+%\newcommand{\msg}[1]{\ensuremath{\mathit{msg}_{#1}}\xspace}
+%\newcommand{\msgIdx}{\ensuremath{i}\xspace}
+%\newcommand{\msgNmbr}{\ensuremath{n}\xspace}
+%\newcommand{\posixSend}{{\tt send()}\xspace}
+%\newcommand{\posixRecv}{{\tt recv()}\xspace}
+%\newcommand{\posixSelect}{{\tt select()}\xspace}
+%\newcommand{\selInstr}{{\sc select}\xspace}
+%\newcommand{\sendInstr}{{\tt send()}\xspace}
+%\newcommand{\recvInstr}{{\tt recv()}\xspace}
+%\newcommand{\selInstr}{{\tt select()}\xspace}
+%\newcommand{\execPrefix}[1]{\ensuremath{\Pi_{#1}}\xspace}
+%\newcommand{\execPrefixAlt}[1]{\ensuremath{\Pi_{#1}^{\prime}}\xspace}
+%\newcommand{\execPrefixBFS}[1]{\ensuremath{\hat{\Pi}_{#1}}\xspace}
+%\newcommand{\execPrefixBFSAlt}[1]{\ensuremath{\hat{\Pi}^{+}_{#1}}\xspace}
+%\newcommand{\symState}[1]{\ensuremath{\sigma_{#1}}\xspace}
+%\newcommand{\symStateAlt}[1]{\ensuremath{\sigma_{#1}^{\prime}}\xspace}
+%\newcommand{\symStateBFS}[1]{\ensuremath{\hat{\sigma}_{#1}}\xspace}
+%\newcommand{\symStateBFSAlt}[1]{\ensuremath{\hat{\sigma}^{+}_{#1}}\xspace}
+%\newcommand{\classify}{\ensuremath{\mathsf{classify}}\xspace}
+%\newcommand{\class}[1]{\ensuremath{C_{#1}}\xspace}
+%\newcommand{\classNmbr}{\ensuremath{m}\xspace}
+%\newcommand{\classIdx}{\ensuremath{j}\xspace}
+%\newcommand{\trainingFrags}[1]{\ensuremath{\Phi_{#1}}\xspace}
+%\newcommand{\trainingFrag}{\ensuremath{\phi}\xspace}
+%\newcommand{\trainingFragAlt}{\ensuremath{\phi'}\xspace}
+%\newcommand{\clusters}{\ensuremath{k}\xspace}
+%\newcommand{\match}[1]{\ensuremath{\mathsf{msgMatch}_{#1}}\xspace}
+%\newcommand{\prefixOf}{\ensuremath{\sqsubseteq}\xspace}
+%
+%%% Algorithm macros
+%\newcommand{\codeIf}{\ensuremath{\mathbf{if}}\xspace}
+%\newcommand{\codeThen}{\ensuremath{\mathbf{then}}\xspace}
+%\newcommand{\codeElse}{\ensuremath{\mathbf{else}}\xspace}
+%\newcommand{\codeWhile}{\ensuremath{\mathbf{while}}\xspace}
+%\newcommand{\codeFalse}{\ensuremath{\mathbf{false}}\xspace}
+%\newcommand{\codeTrue}{\ensuremath{\mathbf{true}}\xspace}
+%\newcommand{\codeAnd}{\ensuremath{\mathbf{and}}\xspace}
+%\newcommand{\codeReturn}{\ensuremath{\mathbf{return}}\xspace}
+%
+%\newcommand{\naiveAlg}{\ensuremath{\mathsf{Random}}\xspace}
+%\newcommand{\verifyAlg}{\ensuremath{\mathsf{verify}}\xspace}
+%\newcommand{\verifyDFSAlg}{\ensuremath{\mathsf{verifyS2C}}\xspace}
+%\newcommand{\liveSet}{\ensuremath{\mathsf{Live}}\xspace}
+%\newcommand{\node}{\ensuremath{\mathsf{nd}}\xspace}
+%\newcommand{\nodeAlt}{\ensuremath{\node'}\xspace}
+%\newcommand{\childField}[1]{\ensuremath{\mathsf{child}_{#1}}\xspace}
+%\newcommand{\pathField}{\ensuremath{\mathsf{path}}\xspace}
+%\newcommand{\stateField}{\ensuremath{\mathsf{state}}\xspace}
+%\newcommand{\editDist}{\ensuremath{\mathsf{editDist}}\xspace}
+%\newcommand{\constraints}{\ensuremath{\mathsf{constraints}}\xspace}
+%\newcommand{\isSymbolicBranch}{\ensuremath{\mathsf{isSymbolicBranch}}\xspace}
+%\newcommand{\isIOInstruction}{\ensuremath{\mathsf{isIOInstr}}\xspace}
+%\newcommand{\newState}{\ensuremath{\sigma}\xspace}
+%\newcommand{\newPath}{\ensuremath{\pi}\xspace}
+%\newcommand{\nextInstruction}{\ensuremath{\mathsf{next}}\xspace}
+%\newcommand{\execStep}{\ensuremath{\mathsf{execStep}}\xspace}
+%\newcommand{\makeNode}{\ensuremath{\mathsf{makeNode}}\xspace}
+%\newcommand{\messageVar}{\ensuremath{\mathsf{msg}}\xspace}
+%\newcommand{\failure}{\ensuremath{\mathit{failure}}\xspace}
+%\newcommand{\condition}{\ensuremath{\mathsf{cond}}\xspace}
+%\newcommand{\stringOne}{\ensuremath{s_1}\xspace}
+%\newcommand{\stringTwo}{\ensuremath{s_2}\xspace}
+%\newcommand{\editDistThreshold}{\ensuremath{t}\xspace}
+%\newcommand{\minEditDistVal}{\ensuremath{d^*}\xspace}
+%\newcommand{\maxEditDistVal}{\ensuremath{d_{\mathrm{max}}}\xspace}
+%\newcommand{\trainingFragClosest}{\ensuremath{\trainingFrag^*}\xspace}
+%\newcommand{\editDistThresholdAlt}{\ensuremath{\editDistThreshold'}\xspace}
+
+\newcommand{\printf}{\texttt{printf}\xspace}
+\newcommand{\coreutils}{\texttt{coreutils}\xspace}
+
+%\newcommand{\allopt}{\ensuremath{\mathsf{All-Opt}}\xspace}
+%\newcommand{\nocanon}{\ensuremath{\mathsf{No-Canonicalization}}\xspace}
+%\newcommand{\noprune}{\ensuremath{\mathsf{No-Pruning}}\xspace}
+\newcommand{\allopt}{\ensuremath{\mathsf{AllOpt}}\xspace}
+\newcommand{\nocanon}{\ensuremath{\mathsf{NoCanon}}\xspace}
+\newcommand{\noprune}{\ensuremath{\mathsf{NoPrune}}\xspace}
+
+
+%\soulregister{\dissertation}{0}
+%\soulregister{\tetrinet}{0}
+%\soulregister{\xpilot}{0}
+%\newcommand{\rac}[1]{{\footnotesize\textcolor{cyan}{[MN: {#1}]}}\xspace}
+%\newcommand{\racc}[1]{{\footnotesize\textcolor{yellow}{[MN: {#1}]}}\xspace}

@@ -1,0 +1,29 @@
+Symbolic Execution
+
+Symbolic execution and program testing. King, James C. Commun. ACM 19, 7 1976
+http://doi.acm.org/10.1145/360248.360252
+
+KLEE: Unassisted and Automatic Generation of High-coverage Tests for Complex Systems Programs. Cristian Cadar and Daniel Dunbar and Dawson Engler. OSDI 2008
+http://dl.acm.org/citation.cfm?id=1855741.1855756
+
+Server-side Detection and Defense
+
+Efficient Context-Sensitive Intrusion Detection. Giffin, Jonathon T and Jha, Somesh and Miller, Barton P. NDSS 2004
+http://www.isoc.org/isoc/conferences/ndss/04/proceedings/Papers/Giffin.pdf
+
+Non-control-data attacks are realistic threats. Shuo Chen, Jun Xu, Emre C. Sezer, Prachi Gauriar, and Ravishankar K. Iyer. USENIX Security 2005.
+http://dl.acm.org/citation.cfm?id=1251410
+
+Bouncer: Securing software by blocking bad input. Costa, Manuel and Castro, Miguel and Zhou, Lidong and Zhang, Lintao and Peinado, Marcus. SOSP 2007
+http://dl.acm.org/citation.cfm?id=1294274
+
+Ripley: Automatically Securing Web 2.0 Applications Through Replicated Execution. Vikram, K. and Prateek, Abhishek and Livshits, Benjamin. CCS 2009
+http://dl.acm.org/citation.cfm?id=1855741.1855756
+
+Verifiable Computation
+
+Non-interactive Verifiable Computing: Outsourcing Computation to Untrusted Workers.  Rosario Gennaro, Craig Gentry, Bryan Parno. CRYPTO 2010.
+http://link.springer.com/chapter/10.1007/978-3-642-14623-7_25
+
+Pinocchio: Nearly Practical Verifiable Computation. Parno, Bryan and Howell, Jon and Gentry, Craig and Raykova, Mariana. IEEE S&P ‘13
+http://dx.doi.org/10.1109/SP.2013.47

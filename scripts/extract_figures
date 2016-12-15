@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# This script is used to extract and crop figures generated in powerpoint and saved to a pdf, one figure per page
+
+OPTIND=1         # Reset in case getopts has been used previously in the shell.
+
+PDFBIN=pdf2eps
+OUTPUT_EXT=eps
+pdffile=""
+config_file=""
+verbose=0
+
+show_help() {
+echo "$0: -c <config> -f <pdf>"
+printf "\tconfig format: [page #] [outputfile]\n"
+}
+
+while getopts "h?vf:c:" opt; do
+    case "$opt" in
+    h|\?)
+        show_help
+        exit 0
+        ;;
+    v)  verbose=1
+        ;;
+    f)  pdffile=$OPTARG
+        ;;
+    c)  config_file=$OPTARG
+        ;;
+    esac
+done
+
+shift $((OPTIND-1))
+
+[ "$1" = "--" ] && shift
+
+if [[ -z "${pdffile}" || -z "${config_file}" ]]; then
+ show_help
+ exit
+fi
+
+type $PDFBIN >/dev/null 2>&1 || { echo >&2 "$PDFBIN Not found, aborting."; show_help; exit 1; }
+
+#pdf_base=$(basename $pdffile .pdf)
+pdf_base=${pdffile%.*}
+while IFS=' ' read -r page output 
+do
+  $PDFBIN $page $pdf_base
+  mv $pdf_base.$OUTPUT_EXT $output
+done <${config_file}
+
+
+
